@@ -1,12 +1,6 @@
 <h2>Instance details</h2>
 
 <table class='table table-bordered'>
-  <tdead>
-    <tr>
-      <th>Attribute</th>
-      <th>Value</th>
-    </tr>
-  </tdead>
   <tbody>
     <tr>
       <td>name</td>
@@ -28,5 +22,26 @@
       <td>process count</td>
       <td><%= @instance.processes.count %></td>
     </tr>
+  </tbody>
+</table>
+
+<h3>Processes</h3>
+
+<table class='table table-bordered'>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>pid</th>
+      <th>cpu_usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @instance.processes.each do |process| %>
+      <tr>
+        <td><%= process.name %></td>
+        <td><%= process.pid %></td>
+        <td><%= process.cpu_usage %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
