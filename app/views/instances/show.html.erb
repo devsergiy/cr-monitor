@@ -51,9 +51,9 @@
 </table>
 
 <% if @instance.running? %>
-  <%= link_to 'Shutdown', [:shutdown, @instance], class: "btn btn-danger #{'disabled' if intermediate_state?(@instance)}" %>
+  <%= link_to 'Shutdown instance', [:shutdown, @instance], class: "btn btn-danger #{'disabled' if intermediate_state?(@instance)}" %>
 <% else %>
-  <%= link_to 'Start', [:start, @instance], class: "btn btn-success #{'disabled' if intermediate_state?(@instance)}" %>
+  <%= link_to 'Start instance', [:start, @instance], class: "btn btn-success #{'disabled' if intermediate_state?(@instance)}" %>
 <% end %>
 
 <% if intermediate_state?(@instance) %>
