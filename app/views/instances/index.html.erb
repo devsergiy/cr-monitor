@@ -8,6 +8,7 @@
       <th>cpu_usage</th>
       <th>disk_usage</th>
       <th>process count</th>
+      <th>state</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,7 @@
         <td><%= instance.cpu_usage %></td>
         <td><%= instance.disk_usage %></td>
         <td><%= instance.processes.count %></td>
+        <td><%= state_label(instance) %></td>
       </tr>
     <% end %>
   </tbody>

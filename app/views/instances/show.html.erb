@@ -22,6 +22,10 @@
       <td>process count</td>
       <td><%= @instance.processes.count %></td>
     </tr>
+    <tr>
+      <td>state</td>
+      <td><%= state_label(@instance) %></td>
+    </tr>
   </tbody>
 </table>
 
@@ -45,3 +49,13 @@
     <% end %>
   </tbody>
 </table>
+
+<% if @instance.running? %>
+  <%= link_to 'Shutdown', [:shutdown, @instance], class: "btn btn-danger #{'disabled' if intermediate_state?(@instance)}" %>
+<% else %>
+  <%= link_to 'Start', [:start, @instance], class: "btn btn-success #{'disabled' if intermediate_state?(@instance)}" %>
+<% end %>
+
+<% if intermediate_state?(@instance) %>
+  <p class="text-info"><i class="glyphicon glyphicon-info-sign"></i>&nbsp;Please wait until instance will be start/shutdown</p>
+<% end %>
