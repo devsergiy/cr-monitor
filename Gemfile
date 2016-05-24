@@ -14,9 +14,13 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# styling
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootswatch-rails'
 
+# aws
+gem 'dynamoid', '~> 1'
+gem 'aws-sdk', '~>2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

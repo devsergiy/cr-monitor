@@ -1,0 +1,32 @@
+<h2>Instance details</h2>
+
+<table class='table table-bordered'>
+  <tdead>
+    <tr>
+      <th>Attribute</th>
+      <th>Value</th>
+    </tr>
+  </tdead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td><%= @instance.name %></td>
+    </tr>
+    <tr>
+      <td>ip_address</td>
+      <td><%= @instance.ip_address %></td>
+    </tr>
+    <tr>
+      <td>cpu_usage</td>
+      <td><%= @instance.cpu_usage %></td>
+    </tr>
+    <tr>
+      <td>disk_usage</td>
+      <td><%= @instance.disk_usage %></td>
+    </tr>
+    <tr>
+      <td>process count</td>
+      <td><%= @instance.processes.count %></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,24 @@
+<h2>Instances</h2>
+
+<table class='table table-bordered'>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>ip_address</th>
+      <th>cpu_usage</th>
+      <th>disk_usage</th>
+      <th>process count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @instances.each do |instance| %>
+      <tr>
+        <td><%= link_to instance.name, instance %></td>
+        <td><%= instance.ip_address %></td>
+        <td><%= instance.cpu_usage %></td>
+        <td><%= instance.disk_usage %></td>
+        <td><%= instance.processes.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
