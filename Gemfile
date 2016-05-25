@@ -25,10 +25,14 @@ gem 'aws-sdk', '~>2'
 # state machine
 gem 'aasm'
 
+# amazon sqs queues
+gem 'active_elastic_job'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec'
+  gem 'sucker_punch'
 end
 
 group :development do
