@@ -102,6 +102,9 @@ GEM
     minitest (5.9.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    passenger (5.0.28)
+      rack
+      rake (>= 0.8.1)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -191,6 +194,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   dynamoid (~> 1)
   jquery-rails
+  passenger
   rails (= 4.2.6)
   rails-api
   rspec
