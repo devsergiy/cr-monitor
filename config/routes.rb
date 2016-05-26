@@ -7,4 +7,8 @@ Rails.application.routes.draw do
       get :start
     end
   end
+
+  namespace :api, module: :api do
+    resources :instances, only: %w(create update)
+  end
 end

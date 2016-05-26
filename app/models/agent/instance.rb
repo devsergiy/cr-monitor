@@ -1,3 +1,5 @@
+require 'token_digest'
+
 module ::Agent
   class Instance
     include Dynamoid::Document
@@ -8,6 +10,8 @@ module ::Agent
     field :cpu_usage, :integer
     field :disk_usage, :number
     field :aasm_state
+
+    field :client_key, :string, default: -> { TokenDigest.generate }
 
     aasm do
       state :running, :initial => true

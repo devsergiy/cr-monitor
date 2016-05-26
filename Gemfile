@@ -28,6 +28,9 @@ gem 'aasm'
 # amazon sqs queues
 gem 'active_elastic_job'
 
+# api
+gem 'rails-api'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
