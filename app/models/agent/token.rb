@@ -6,11 +6,8 @@ module ::Agent
 
     field :token, :string, default: -> { TokenDigest.generate }
     field :updated_at, :datetime, default: -> { Time.zone.now }
-    field :client_key
 
-    def expired?
-      (updated_at - Time.zone.now) > 10.minutes
-    end
+    belongs_to :instance, class: ::Agent::Instance, inverse_of: :token
 
     def refresh_token!
       self.token = TokenDigest.generate

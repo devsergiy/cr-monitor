@@ -5,13 +5,11 @@ module ::Agent
     include Dynamoid::Document
     include AASM
 
-    field :name
+    field :instance_id
     field :ip_address
     field :cpu_usage, :integer
     field :disk_usage, :number
     field :aasm_state
-
-    field :client_key, :string, default: -> { TokenDigest.generate }
 
     aasm do
       state :running, :initial => true
@@ -39,5 +37,6 @@ module ::Agent
     end
 
     has_many :processes, class: ::Agent::Process
+    has_one :token, class: ::Agent::Token, inverse_of: :instance
   end
 end

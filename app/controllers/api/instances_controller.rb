@@ -3,15 +3,17 @@ class Api::InstancesController < ActionController::API
     # TODO API_KEY
 
     instance =
-      ::Agent::Instance.where(name: 'test').first ||
+      ::Agent::Instance.where(instance_id: params[:instance_id]).first ||
       ::Agent::Instance.create({
-        name: 'test',
-        ip_address: '0.0.0.0'
+        instance_id: params[:instance_id]
       })
 
     token =
-      ::Agent::Token.where(client_key: instance.client_key).first ||
-      ::Agent::Token.new(client_key: instance.client_key)
+      if instance.token.nil?
+        ::Agent::Token.create(instance: instance)
+      else
+        instance.token.refresh_token!
+      end
 
     render json: { access_token: token.token }
   end
@@ -26,15 +28,11 @@ class Api::InstancesController < ActionController::API
   protected
 
   def authenticate
-    head :unauthorized and return unless valid_token?
-  end
-
-  def valid_token?
-    agent_token.client_key == current_instance.client_key
+    head :unauthorized and return unless access_token.present?
   end
 
   def current_instance
-    @instance ||= ::Agent::Instance.find(params[:id])
+    @instance ||= ::Agent::Instance.where(instance_id: params[:id])
   end
 
   def agent_token

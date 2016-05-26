@@ -3,7 +3,7 @@
 <table class='table table-bordered'>
   <thead>
     <tr>
-      <th>name</th>
+      <th>instance_id</th>
       <th>ip_address</th>
       <th>cpu_usage</th>
       <th>disk_usage</th>
@@ -14,7 +14,7 @@
   <tbody>
     <% @instances.each do |instance| %>
       <tr>
-        <td><%= link_to instance.name, instance %></td>
+        <td><%= link_to instance.instance_id, instance %></td>
         <td><%= instance.ip_address %></td>
         <td><%= instance.cpu_usage %></td>
         <td><%= instance.disk_usage %></td>
