@@ -8,7 +8,9 @@
         <!-- <li class="active"><%= link_to('Instances', root_path) %></a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <!-- <li><a href="#">Default</a></li> -->
+        <% if current_user %>
+          <li><%= button_to 'Sign out', sign_out_path, method: :delete, class: 'btn btn-link' %></li>
+        <% end %>
       </ul>
     </div>
   </div>
