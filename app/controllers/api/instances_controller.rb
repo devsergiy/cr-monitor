@@ -1,5 +1,7 @@
 class Api::InstancesController < ActionController::API
   def create
+    # TODO API_KEY
+
     instance =
       ::Agent::Instance.where(name: 'test').first ||
       ::Agent::Instance.create({
