@@ -7,7 +7,7 @@ namespace :db do
       password_confirmation: '123456'
     })
 
-    return if Rails.env.production
+    return if Rails.env.production?
 
     Agent::Instance.all.each(&:delete)
     Agent::Process.all.each(&:delete)
