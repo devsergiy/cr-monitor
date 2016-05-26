@@ -1,4 +1,7 @@
 class Api::InstancesController < ActionController::API
+  before_action :authenticate_with_api_key
+  before_action :authenticate_with_token, only: :update
+
   def create
     # TODO API_KEY
 
@@ -19,19 +22,21 @@ class Api::InstancesController < ActionController::API
   end
 
   def update
-    authenticate
-
     agent_token.refresh_token!
     render json: { access_token: agent_token.token }
   end
 
   protected
 
-  def authenticate
-    head :unauthorized and return unless access_token.present?
+  def authenticate_with_token
+    head :unauthorized and return unless agent_token.present?
   end
 
-  def current_instance
+  def authenticate_with_api_key
+   head :unauthorized and return unless api_key.present? && Rails.application.secrets.api_key == api_key
+  end
+
+  def instance
     @instance ||= ::Agent::Instance.where(instance_id: params[:id])
   end
 
@@ -41,5 +46,9 @@ class Api::InstancesController < ActionController::API
 
   def access_token
     @access_token ||= request.headers.fetch(:token)
+  end
+
+  def api_key
+    @api_key ||= request.headers.fetch(:api_key)
   end
 end
