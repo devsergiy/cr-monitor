@@ -1,6 +1,14 @@
 namespace :db do
   desc "Populate db with test data"
   task :seed => :environment do
+    User.create({
+      email: 'admin@example.com',
+      password: '123456',
+      password_confirmation: '123456'
+    })
+
+    return if Rails.env.production
+
     Agent::Instance.all.each(&:delete)
     Agent::Process.all.each(&:delete)
 
@@ -15,12 +23,6 @@ namespace :db do
       end
       instance.save
     end
-
-    User.create({
-      email: 'admin@example.com',
-      password: '123456',
-      password_confirmation: '123456'
-    })
   end
 
   def create_process(instance)
