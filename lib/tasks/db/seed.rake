@@ -7,8 +7,10 @@ namespace :db do
       password_confirmation: '123456'
     })
 
-    return if Rails.env.production?
+    create_instances unless Rails.env.production?
+  end
 
+  def create_instances
     Agent::Instance.all.each(&:delete)
     Agent::Process.all.each(&:delete)
 
