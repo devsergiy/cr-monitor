@@ -6,8 +6,7 @@ namespace :db do
 
     3.times do |i|
       instance = Agent::Instance.create({
-          name: "west-smpl-#{Time.now}",
-          ip_address: "127.0.0.#{i}",
+          instance_id: "west-smpl-#{Time.now.to_i}",
           cpu_usage: 10,
           disk_usage: 2000
       })

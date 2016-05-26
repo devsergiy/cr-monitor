@@ -6,9 +6,9 @@ module ::Agent
     include AASM
 
     field :instance_id
-    field :ip_address
-    field :cpu_usage, :integer
+    field :cpu_usage, :number
     field :disk_usage, :number
+    field :mem_usage, :number
     field :aasm_state
 
     aasm do
