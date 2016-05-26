@@ -22,11 +22,21 @@ class Api::InstancesController < ActionController::API
   end
 
   def update
+    processes_data = instance_params.delete(:processes)
+    instance.update_attributes(instance_params)
+
     agent_token.refresh_token!
     render json: { access_token: agent_token.token }
   end
 
   protected
+
+  def instance_params
+    @instance_params ||= params.permit(
+      :disk_usage, :cpu_usage, :mem_usage,
+      processes:[ :pid, :name, :virtual_memory, :cpu_use_percentage, :mem_use_percentage ]
+    )
+  end
 
   def authenticate_with_token
     head :unauthorized and return unless agent_token.present?
@@ -37,7 +47,7 @@ class Api::InstancesController < ActionController::API
   end
 
   def instance
-    @instance ||= ::Agent::Instance.where(instance_id: params[:id])
+    @instance ||= ::Agent::Instance.where(instance_id: params[:id]).first
   end
 
   def agent_token
@@ -49,6 +59,6 @@ class Api::InstancesController < ActionController::API
   end
 
   def api_key
-    @api_key ||= request.headers.fetch(:api_key)
+    @api_key ||= request.headers.fetch(:'api-key')
   end
 end
