@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       get :shutdown
       get :start
     end
+
+    # TODO: reports
+    # most cpu_usage, few disk space, server process cpu usage
   end
 
   namespace :api, module: :api do
