@@ -1,4 +1,5 @@
 class InstancesController < ApplicationController
+  before_action :authenticate
   before_action :set_instance, except: :index
 
   def index
