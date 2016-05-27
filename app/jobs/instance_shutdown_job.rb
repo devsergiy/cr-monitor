@@ -2,7 +2,7 @@ class InstanceShutdownJob < InstanceStateJob
   def change_state(instance)
     i = ec2.instance(instance.instance_id)
 
-    if i.exists?
+    if Rails.env.production? && i.exists?
       case i.state.code
       when 48  # terminated
         puts "#{id} is terminated, so you cannot stop it"

@@ -2,7 +2,7 @@ class InstanceStartJob < InstanceStateJob
   def change_state(instance)
     i = ec2.instance(instance.instance_id)
 
-    if i.exists?
+    if Rails.env.production? && i.exists?
       case i.state.code
       when 0  # pending
         puts "#{id} is pending, so it will be running in a bit"

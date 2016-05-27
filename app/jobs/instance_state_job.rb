@@ -8,6 +8,6 @@ class InstanceStateJob < ActiveJob::Base
   end
 
   def ec2
-    @ec2 ||= Aws::EC2::Resource.new(region: 'us-east-1b')
+    @ec2 ||= Aws::EC2::Resource.new(region: 'us-east-1')
   end
 end
