@@ -3,8 +3,6 @@ class Api::InstancesController < ActionController::API
   before_action :authenticate_with_token, only: :update
 
   def create
-    # TODO API_KEY
-
     instance =
       ::Agent::Instance.where(instance_id: params[:instance_id]).first ||
       ::Agent::Instance.create({
@@ -25,6 +23,11 @@ class Api::InstancesController < ActionController::API
     processes_data = instance_params.delete(:processes)
     instance.update_attributes(instance_params)
 
+    processes_data.each do |process|
+      p = instance.processes.where(pid: process[:pid]).first || instance.processes << ::Agent::Process.new(instance: instance)
+      p.update_attributes(process)
+    end
+
     agent_token.refresh_token!
     render json: { access_token: agent_token.token }
   end
@@ -34,7 +37,7 @@ class Api::InstancesController < ActionController::API
   def instance_params
     @instance_params ||= params.permit(
       :disk_usage, :cpu_usage, :mem_usage,
-      processes:[ :pid, :name, :virtual_memory, :cpu_use_percentage, :mem_use_percentage ]
+      processes:[ :pid, :name, :virtual_memory, :cpu_usage, :mem_usage ]
     )
   end
 

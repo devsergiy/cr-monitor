@@ -3,8 +3,10 @@ module ::Agent
     include Dynamoid::Document
 
     field :name
-    field :pid
-    field :cpu_usage, :integer
+    field :pid, :integer
+    field :cpu_usage, :number
+    field :mem_usage, :number
+    field :virtual_memory, :integer
 
     belongs_to :instance, class: ::Agent::Instance
   end
