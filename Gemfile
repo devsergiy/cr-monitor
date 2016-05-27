@@ -23,9 +23,6 @@ gem 'aws-sdk', '~>2'
 # state machine
 gem 'aasm'
 
-# amazon sqs queues
-gem 'active_elastic_job'
-
 # api
 gem 'rails-api'
 

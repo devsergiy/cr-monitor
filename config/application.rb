@@ -30,5 +30,6 @@ module CrMonitor
     # config.i18n.default_locale = :de
 
     config.api_only = false
+    config.active_job.queue_adapter = :sucker_punch
   end
 end
