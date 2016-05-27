@@ -12,7 +12,7 @@ class InstancesController < ApplicationController
   def shutdown
     unless @instance.off?
       @instance.shutdown!
-      InstanceShutdownJob.perform_later(@instance.id)
+      InstanceShutdownJob.perform_later(@instance)
     end
 
     redirect_to @instance
@@ -21,7 +21,7 @@ class InstancesController < ApplicationController
   def start
     unless @instance.running?
       @instance.start!
-      InstanceStartJob.perform_later(@instance.id)
+      InstanceStartJob.perform_later(@instance)
     end
 
     redirect_to @instance
