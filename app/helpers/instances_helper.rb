@@ -2,7 +2,7 @@ module InstancesHelper
   STATE_MAP = {
     'running'       => 'success',
     'off'           => 'default',
-    'highload'      => 'off',
+    'highload'      => 'warning',
     'shutting_down' => 'warning',
     'starting'      => 'info'
   }.freeze

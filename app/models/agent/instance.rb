@@ -27,6 +27,10 @@ module ::Agent
         transitions from: :running, to: :highload
       end
 
+      event :calm do
+        transitions from: :highload, to: :running
+      end
+
       event :shutdown do
         transitions from: :running, to: :shutting_down
       end
@@ -38,5 +42,15 @@ module ::Agent
 
     has_many :processes, class: ::Agent::Process
     has_one :token, class: ::Agent::Token, inverse_of: :instance
+
+    before_save :check_load
+
+    def check_load
+      if cpu_usage.to_f > 95
+        overload
+      elsif highload?
+        calm
+      end
+    end
   end
 end

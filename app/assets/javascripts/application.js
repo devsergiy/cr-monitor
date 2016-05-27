@@ -21,4 +21,8 @@ $(document).ready(function() {
         $(".alert").alert('close');
     }, 5000);
   }
+
+  if (window.location.pathname != '/sign_in') {
+    setTimeout("location.reload(true);", 20000);
+  }
 });
